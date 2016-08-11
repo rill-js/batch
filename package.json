@@ -1,7 +1,7 @@
 {
   "name": "@rill/batch",
   "description": "Handle batch requests with a Rill server.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "browser": "client/index.js",
   "bugs": "https://github.com/rill-js/batch/issues",

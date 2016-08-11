@@ -1,4 +1,5 @@
 'use strict'
+var url = require('url')
 var fetch = require('node-fetch')
 var promiseLimit = require('promise-limit')
 
@@ -17,12 +18,12 @@ module.exports = function (opts) {
   return function batchMiddleware (ctx) {
     var req = ctx.req
     var res = ctx.res
-    var origin = req.origin
+    var href = req.href
     var endpoints = req[opts.from]
     var result = {}
     return Promise.all(Object.keys(endpoints).map(function (key) {
       return limit(function () {
-        var path = origin + endpoints[key]
+        var path = url.resolve(href, endpoints[key])
         return fetch(path, { method: 'GET', headers: req.headers }).then(function (res) {
           return parseBody(res).then(function (body) {
             result[key] = {
