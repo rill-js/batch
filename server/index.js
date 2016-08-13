@@ -9,7 +9,7 @@ var promiseLimit = require('promise-limit')
 module.exports = function (opts) {
   opts = opts || {}
   opts.from = opts.from || 'query'
-  var limit = opts.limit ? promiseLimit(opts.limit) : noLimit
+  var limitConcurrency = opts.concurrency ? promiseLimit(opts.concurrency) : noLimit
 
   if (opts.from !== 'query' && opts.from !== 'body') {
     throw new TypeError('@rill/batch: opts.from must be "query" or "body".')
@@ -22,7 +22,7 @@ module.exports = function (opts) {
     var endpoints = req[opts.from]
     var result = {}
     return Promise.all(Object.keys(endpoints).map(function (key) {
-      return limit(function () {
+      return limitConcurrency(function () {
         var path = url.resolve(href, endpoints[key])
         return fetch(path, { method: 'GET', headers: req.headers }).then(function (res) {
           return parseBody(res).then(function (body) {

@@ -54,7 +54,7 @@ fetch('myapi.com/batch?a=/page1&b=/page2')
 
 # API
 
-+ **batch({ from: 'query' || 'body', limit: Infinity })** : Creates a middleware that will batch api requests.
++ **batch({ from: 'query' || 'body', concurrency: Infinity })** : Creates a middleware that will batch api requests.
 
 ```javascript
 // Handle batch requests at 'GET /batch' using request query.
@@ -63,8 +63,8 @@ app.get('/batch', batch({ from: 'query' }))
 // Handle batch requests at 'POST /patch' using request body.
 app.post('/batch', batch({ from: 'body' }))
 
-// Limit batch request concurrency to 5 (default is infinity).
-app.get('/batch', batch({ limit: 5 }))
+// Limit concurrent batch request to 5 (default is infinity).
+app.get('/batch', batch({ concurrency: 5 }))
 ```
 ---
 

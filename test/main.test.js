@@ -69,14 +69,14 @@ test('Handles batch requests with POST and body', function (t) {
     }, t.fail)
 })
 
-test('Handles batch requests with a limit', function (t) {
+test('Handles batch requests with a concurrency limit', function (t) {
   t.plan(5)
 
   var started = new Date()
   var request = agent(rill()
-    .get('/batch', batch({ limit: 1 }))
+    .get('/batch', batch({ concurrency: 1 }))
     .use(function (ctx, next) {
-      // Sleep for 1s to ensure limit is working.
+      // Sleep for 1s to ensure concurrency is working.
       return new Promise(function (resolve) {
         setTimeout(resolve, 500)
       }).then(next)
@@ -102,7 +102,7 @@ test('Handles batch requests with a limit', function (t) {
     })
     .expect(200)
     .then(function (res) {
-      t.ok(hasElapsed(1000), '1s has elapsed')
+      t.ok(hasElapsed(1000), '1 second has elapsed')
       t.equal(res.body.page1.body, 'test1', 'should fetch page 1 as text')
       t.deepEqual(res.body.page2.body, { test: 'test2' }, 'should fetch page 2 as json')
     }, t.fail)
@@ -110,6 +110,6 @@ test('Handles batch requests with a limit', function (t) {
   // Check if a certain duration has elapsed with 25ms tolerance.
   function hasElapsed (ms) {
     var diff = +new Date() - started
-    return diff >= ms && diff < ms + 25
+    return diff >= ms && diff < ms + 50
   }
 })
