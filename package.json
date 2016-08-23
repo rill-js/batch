@@ -1,15 +1,15 @@
 {
   "name": "@rill/batch",
   "description": "Handle batch requests with a Rill server.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "browser": "client/index.js",
   "bugs": "https://github.com/rill-js/batch/issues",
   "devDependencies": {
     "@rill/body": "^1.2.0",
-    "rill": "^0.8.1",
+    "rill": "^0.8.10",
     "snazzy": "^4.0.1",
-    "standard": "^7.1.2",
+    "standard": "^8.0.0-beta.5",
     "supertest": "^2.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0"
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "node-fetch": "^1.6.0",
+    "object-assign": "^4.1.0",
     "promise-limit": "^2.2.0"
   }
 }
