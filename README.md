@@ -35,7 +35,6 @@ Currently, only `GET` requests can be batched.
 
 # Installation
 
-#### Npm
 ```console
 npm install @rill/batch
 ```
@@ -45,8 +44,9 @@ npm install @rill/batch
 #### app.js
 
 ```js
+const rill = require('rill')
 const app = rill()
-const batch = require("@rill/batch")
+const batch = require('@rill/batch')
 const loadUser = require('./load-user.js')
 
 // Setup the middleware.
